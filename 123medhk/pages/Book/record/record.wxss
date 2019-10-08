@@ -1,0 +1,21 @@
+/* pages/Book/record/record.wxss */
+
+.record-outter {
+  min-height: 90vh;
+}
+
+.record {
+}
+.record-inner {
+  min-height: 120rpx;
+  border-bottom: 1px solid #ebebeb;
+  padding-bottom: 30rpx;
+}
+.record-mark {
+  max-height: 90rpx;
+  overflow: scroll;
+}
+
+.record-none {
+  margin-top: -50vh;
+}

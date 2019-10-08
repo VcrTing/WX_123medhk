@@ -1,0 +1,34 @@
+{
+  "pages": [
+    "pages/Home/index/index",
+    "pages/Book/record/add/add",
+    "pages/Book/record/record",
+    "pages/Book/record/add_success/add_success",
+    "pages/Book/record/look/look",
+    "pages/logs/logs",
+    "pages/Book/book/book"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "123Medhk",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/Home/index/index",
+        "text": "首页",
+        "selectedIconPath": "/static/home-solid.png",
+        "iconPath": "/static/home-solid.png"
+      },
+      {
+        "pagePath": "pages/Book/record/record",
+        "text": "預約记录",
+        "selectedIconPath": "/static/record-solid.png",
+        "iconPath": "/static/record-solid.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

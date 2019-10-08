@@ -1,0 +1,64 @@
+<!--pages/Book/record/record.wxml-->
+<view class="container">
+  <view class="row nav-shadow z-upper pos-fixed b-white">
+    <view class="row-inner clearfix">
+      <view class="f-l w-half">
+        <text class="header-main t-main t-bold">
+          預約記錄
+        </text>
+      </view>
+      <view class="f-l w-half"></view>
+    </view>
+  </view>
+  <view class="row b-light z-lower">
+    <view class="empty-150"></view>
+    <view class="empty-20"></view>
+    <view class="row-inner-fullwidth">
+      <view class="record-outter"  wx:if="{{ is_null == false }}">
+        <view class="record b-white" wx:for="{{ record }}" wx:key="index" wx:if="{{ item.status }}">
+          <view class="empty-20 b-light"></view>
+          <view class="record-inner">
+            <view class="row">
+              <view class="row-inner">
+                <text class="t-dark">
+                  預約時間: {{ item.reserve_time }}
+                </text>
+              </view>
+            </view>
+            <view class="row t-grey">
+              <view class="empty-30"></view>
+              <view class="row-inner clearfix">
+                <view class="f-l w-half">
+                  狀態: 
+                  <view class="d-inline t-red" wx:if="{{ item.is_complete == 1 }}">
+                    预约中
+                  </view>
+                  <view class="d-inline t-green" wx:if="{{ item.is_complete == 2 }}">
+                    已完成
+                  </view>
+                </view>
+                <view class="f-l w-half t-main">
+                  <view class="icon-box f-r" bindtap="recordLook" data-id="{{ item.id }}">
+                    <view class="icon-box-text d-inline">
+                      查看详情
+                    </view>
+                    <view class="icon-box-icon d-inline">
+                      
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="record-outter t-center d-dark" wx:if="{{ is_null == true }}">
+        <view class="empty-150"></view>
+        <view class="empty-150"></view>
+        <view class="empty-150"></view>
+        <text class="t-dark">暫無記錄</text>
+      </view>
+    </view>
+  </view>
+  <view class="empty-0"></view>
+</view>

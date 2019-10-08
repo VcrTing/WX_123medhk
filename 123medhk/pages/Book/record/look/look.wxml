@@ -1,0 +1,54 @@
+<!--pages/Book/record/look/look.wxml-->
+<view class="container">
+  <view class="row nav-shadow z-upper pos-fixed b-white">
+    <view class="row-inner clearfix">
+      <view class="f-l w-half">
+        <text class="header-main t-main t-bold">
+          預約詳情
+        </text>
+      </view>
+      <view class="f-l w-half"></view>
+    </view>
+  </view>
+  <view class="row t-dark">
+    <view class="empty-150"></view>
+    <view class="empty-15"></view>
+    <view class="empty-30 b-light"></view>
+    <view class="row-inner d-dark">
+      <view class="empty-120"></view>
+      <view class="d-block"><view class="t-grey d-inline">預約時間:</view> {{ record.reserve_time }}</view>
+      <view class="d-block"><view class="t-grey d-inline">預約狀態:</view>
+        <view class="d-inline t-green" wx:if="{{ record.is_complete == 2 }}">
+          已完成
+        </view> 
+        <view class="d-inline t-red" wx:if="{{ record.is_complete == 1 }}">
+          预约中
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="empty-60"></view>
+  <view class="row t-dark">
+    <view class="row-inner">
+      <text class="t-main h4">
+        資料
+      </text>
+      <view class="hr"></view>
+      <view class="empty-20"></view>
+      <text class="d-block"><text class="t-grey">姓名:</text> {{ record.name }}</text>
+      <text class="d-block"><text class="t-grey">電話:</text> {{ record.phone }}</text>
+      <text class="d-block"><text class="t-grey">生日:</text> {{ record.birth }}</text>
+      <text class="t-red f-r" bindtap="trash">删除预约</text>
+    </view>
+  </view>
+  <view class="row">
+    <view class="empty-150"></view>
+    <view class="empty-30"></view>
+    <view class="row-inner">
+      <button class="btn btn-green" bindtap="goBack" data-id="{{ id }}">
+        返回
+      </button>
+    </view>
+  </view>
+  <view class="empty-150"></view>
+</view>

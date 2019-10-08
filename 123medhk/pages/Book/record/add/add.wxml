@@ -1,0 +1,100 @@
+<view class="container">
+  <view class="row t-center mt-large-r">
+    <view class="row-inner">
+      <text class="header-main t-main t-bold">
+        在線預約
+      </text>
+    </view>
+  </view>
+  <view class="row">
+    <view class="row-inner">
+      <view class="empty-20"></view>
+      <form class="def-form">
+        <view class="form-group">
+            <text>姓名: </text>
+            <view class="t-red f-r">*</view>
+            <view class="form-ele">
+                <input placeholder="" auto-focus bindinput="formName"/>
+                <view class="form-section"></view>
+            </view>
+        </view>
+        <view class="form-group">
+          <text>出生日期: </text>  
+          <view class="t-red f-r">*</view>
+          <view class="form-ele">
+              <picker
+                  mode="date"
+                  value="{{ birth }}"
+                  bindchange="formBirth"
+              >
+                  <view class="picker">
+                      <view class="picker-value">{{ birth }}</view>
+                  </view>
+              </picker>
+          </view>
+        </view>
+        <view class="form-group">
+            <text>性别: </text>
+            <view class="form-ele">
+                <radio-group class="radio-group" bindchange="formSex">
+                    <label class="radio">
+                        <radio value="male" checked="male"
+                        color="rgb(137, 205, 223)"/>
+                        男
+                    </label>
+                    <label class="radio">
+                        <radio value="female" checked="female" 
+                        color="rgb(137, 205, 223)"/>
+                        女
+                    </label>
+                </radio-group>
+            </view>
+        </view>
+        <view class="form-group">
+            <text>手機號碼: </text>
+            <view class="form-ele">
+                <input placeholder="" bindinput="formPhone" type="number"/>
+                <view class="form-section"></view>
+            </view>
+        </view>
+        <view class="form-group">
+          <text>預約日期: </text> 
+          <view class="t-red f-r">*</view>
+          <view class="form-ele">
+            <picker
+                mode="date"
+                value="{{ reserve_date }}"
+                bindchange="formDate"
+            >
+                <view class="picker">
+                    <view class="picker-value">{{ reserve_date }}</view>
+                </view>
+            </picker>
+          </view>
+        </view>
+        <view class="form-group">
+          <text>預約時間: </text> 
+          <view class="t-red f-r">*</view>
+          <view class="form-ele">
+            <picker mode="time"
+              value="{{ reserve_time }}"
+              start="{{ start_time }}"
+              end="{{ end_time }}"
+              bindchange="formTime">
+              <view class="picker">
+                <view class="picker-value">
+                  {{ reserve_time }}
+                </view>
+              </view>
+            </picker>
+          </view>
+        </view>
+        <view class="form-group">
+            <button bindtap="submit">提交</button>
+        </view>
+      </form>
+    </view>
+  </view>
+  <view class="empty-90"></view>
+  <view class="empty-60"></view>
+</view>
