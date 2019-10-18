@@ -7,7 +7,7 @@ const API = {
     'LOGIN': HOST + '/api/member/login/'
   }
 }
-const APPID = '	wx1f12b464cfa49b00'
+const APPID = 'wx1f12b464cfa49b00'
 const SECRET = '24e18921aaa46b539a00ee0a7fc07ae8'
 
 App({

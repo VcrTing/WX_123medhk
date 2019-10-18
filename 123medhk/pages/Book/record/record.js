@@ -71,7 +71,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.record()
+    const is_login = app.globalData.memberId
+    if (is_login) {
+      this.record()
+    } else {
+      app.toast('未授权，无法查看预约记录！！！', 'none')
+    }
   },
 
   /**

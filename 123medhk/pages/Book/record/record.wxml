@@ -4,24 +4,24 @@
     <view class="row-inner clearfix">
       <view class="f-l w-half">
         <text class="header-main t-main t-bold">
-          預約記錄
+          预约记录
         </text>
       </view>
       <view class="f-l w-half"></view>
     </view>
   </view>
-  <view class="row b-light z-lower">
+  <view class="row b-lightgrey z-lower">
     <view class="empty-150"></view>
     <view class="empty-20"></view>
     <view class="row-inner-fullwidth">
       <view class="record-outter"  wx:if="{{ is_null == false }}">
         <view class="record b-white" wx:for="{{ record }}" wx:key="index" wx:if="{{ item.status }}">
-          <view class="empty-20 b-light"></view>
+          <view class="empty-20 b-lightgrey"></view>
           <view class="record-inner">
             <view class="row">
               <view class="row-inner">
                 <text class="t-dark">
-                  預約時間: {{ item.reserve_time }}
+                  预约时间: {{ item.reserve_date }} {{ item.reserve_time }}
                 </text>
               </view>
             </view>
@@ -29,7 +29,7 @@
               <view class="empty-30"></view>
               <view class="row-inner clearfix">
                 <view class="f-l w-half">
-                  狀態: 
+                  状态: 
                   <view class="d-inline t-red" wx:if="{{ item.is_complete == 1 }}">
                     预约中
                   </view>
@@ -56,7 +56,7 @@
         <view class="empty-150"></view>
         <view class="empty-150"></view>
         <view class="empty-150"></view>
-        <text class="t-dark">暫無記錄</text>
+        <text class="t-dark">暂无记录</text>
       </view>
     </view>
   </view>

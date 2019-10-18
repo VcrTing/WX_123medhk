@@ -50,8 +50,35 @@
 }
 
 /* by Me */
+
+.swiper-index {
+  width: 100%;
+  height: 351.5rpx;
+  display: block;
+}
+.swiper-index .swiper-image {
+  width: 100%;
+  height: inherit;
+}
+
+/* 主要服务 */
+.card {
+  padding: 90rpx 15rpx;
+  border: 2rpx solid white;
+}
+.card image {
+  width: 400rpx;
+  height: 400rpx;
+  border-radius: 50%;
+  border: 2rpx solid white;
+  margin: 0 auto;
+}
+.card .card-title {
+  margin-top: 40rpx;
+}
+
 .header-line {
-  width: 90rpx;
+  width: 120rpx;
   height: 5px;
   margin: 0 auto;
 }
@@ -63,5 +90,24 @@
 }
 
 .bg-image-y {
-  background: url('/static/y.jpg') no-repeat fixed center;
+  background: rgba(0,0,0,0.8) url(https://tech.up5d.com/wp-content/uploads/2016/03/contact-parallax.jpg?id=735) no-repeat scroll center;
+  background-size: cover;
+}
+
+.medic-time-title .the-text {
+  width: 40%;
+}
+.medic-time-title .the-line {
+  width: 30%;
+  height: 3px;
+  background: white;
+  margin-top: 30rpx;
+}
+
+.medic-time-content {
+  width: 100%;
+  border: 2px solid white;
+  border-top: none !important;
+  box-sizing: border-box;
+  margin-top: -24rpx;
 }

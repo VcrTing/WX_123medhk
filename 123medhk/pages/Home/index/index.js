@@ -12,10 +12,47 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
 
+    swiperUrl: [{
+      "url": "https://tech.up5d.com/wp-content/uploads/2016/06/bg1.jpg"
+    }, {
+      "url": "https://tech.up5d.com/wp-content/uploads/2016/06/bg3.jpg"
+    }],
+
+    fade: '',
+    slide: '',
+    show_modal: false
   },
   //事件处理函数
-  onReady: function () {
+  modalOut: function () {
+    this.fade.opacity(0).step()
+    this.slide.translateY(-120).step()
 
+    this.setData({
+      fade: this.fade.export(),
+      slide: this.slide.export()
+    })
+    setTimeout(() => {
+      this.setData({
+        show_modal: false
+      })
+    }, 3000)
+  },
+  goRecord: function () {
+    wx.switchTab({
+      url: '/pages/Book/record/add/add',
+    })
+  },
+  onReady: function () {
+    this.fade = wx.createAnimation({
+      duration: 2000,
+      timingFunction: 'ease',
+      delay: 300
+    })
+    this.slide = wx.createAnimation({
+      duration: 2000,
+      timingFunction: 'ease',
+      delay: 300
+    })
   },
   onLoad: function () {
     /*
@@ -42,6 +79,8 @@ Page({
             userInfo: res.userInfo,
             hasUserInfo: true
           })
+        },
+        fail: res => {
         }
       })
     }
@@ -50,56 +89,62 @@ Page({
   onShow: function () {
     this.member()
   },
-  member: function () {
+  _member: function (res) {
     const self = this
-    wx.getUserInfo({
-      success: (res) => {
-        res = res.userInfo
-        this.setData({
-          userInfo: res
-        })
-        wx.login({
-          success: function (res) {
-            const code = res.code
-            console.log('code =', code)
-            const url = app.globalData.api.MEMBER.LOGIN
-            wx.request({
-              url: url,
-              method: 'POST',
-              data: JSON.stringify({
-                code: code,
-                appid: app.globalData.appId,
-                secret: app.globalData.secret,
-                userInfo: self.data.userInfo
-              }),
-              success: (res) => {
-                res = res.data
-                self.setData({
-                  memberId: res.id,
-                  r_num: res.openid
-                })
-                app.globalData.memberId = res.id
-                console.log('memberid =', res.id)
-              },
-              fail: (err) => {
-                console.log('member Error: ', err)
-              }
+    this.setData({
+      userInfo: res
+    })
+    wx.login({
+      success: function (res) {
+        const code = res.code
+        const url = app.globalData.api.MEMBER.LOGIN
+        wx.request({
+          url: url,
+          method: 'POST',
+          data: JSON.stringify({
+            code: code,
+            appid: app.globalData.appId,
+            secret: app.globalData.secret,
+            userInfo: self.data.userInfo
+          }),
+          success: (res) => {
+            res = res.data
+            self.setData({
+              memberId: res.id,
+              r_num: res.openid
             })
+            app.globalData.memberId = res.id
+            console.log('memberid =', res.id)
+          },
+          fail: (err) => {
+            console.log('member Error: ', err)
           }
         })
+      }
+    })
+  },
+  member: function () {
+    wx.getUserInfo({
+      success: (res) => {
+        this.modalOut()
+        res = res.userInfo
+        this._member(res)
       },
       fail: (err) => {
-        console.log(err)
+        console.log('应该授权！！')
+        this.setData({
+          show_modal: true
+        })
       }
     })
   },
   getUserInfo: function (e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+    this.member()
   },
   _msg: function (is_msg) {
     /*

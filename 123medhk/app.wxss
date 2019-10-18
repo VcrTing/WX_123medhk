@@ -4,6 +4,7 @@
   display: block;
   min-height: 100%;
   box-sizing: border-box;
+  z-index: 100
 } 
 
 .row {
@@ -87,15 +88,15 @@
 .form-group button {
   border-radius: 0;
   border: 1px solid #89cddf;
-  color: #89cddf;
-  background: none;
   margin-top: 60rpx;
+  color: white;
+  background: #89cddf;
 }
 .form-group button:hover {
   border-radius: 0;
   border: 1px solid #89cddf;
-  color: white;
-  background: #89cddf;
+  color: #89cddf;
+  background: none;
 }
 
 .btn {
@@ -112,6 +113,37 @@
 .btn-green:hover {
   color: white;
   background: #3BBD81;
+}
+
+.btn-w-mid {
+  width: 375rpx;
+}
+
+.btn-main-full {
+  color: white;
+  background: #89cddf;
+  border: 1px solid #89cddf;
+  transform: translate all 0.5s;
+  margin: 0 auto;
+  padding: 30rpx 60rpx;
+}
+.btn-main-full:hover {
+  background: #378aa0;
+  border: 1px solid #378aa0;
+}
+
+.modal {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  position: fixed;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.8);
+}
+.modal-body {
+  background: rgba(255, 255, 255, 0.95);
+  min-height: 90rpx;
+  padding: 90rpx 15rpx;
 }
 
 /* Tool */
@@ -161,6 +193,10 @@
   position: relative; }
 .pos-absolute {
   position: absolute; }
+.vis-hidden {
+  visibility: hidden; }
+.bri-dark {
+  filter: brightness(0.4); }
 
 .t-right {
   text-align: right; }

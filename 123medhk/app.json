@@ -23,8 +23,14 @@
         "iconPath": "/static/home-solid.png"
       },
       {
+        "pagePath": "pages/Book/record/add/add",
+        "text": "预约",
+        "selectedIconPath": "/static/record-solid.png",
+        "iconPath": "/static/record-solid.png"
+      },
+      {
         "pagePath": "pages/Book/record/record",
-        "text": "預約记录",
+        "text": "预约记录",
         "selectedIconPath": "/static/record-solid.png",
         "iconPath": "/static/record-solid.png"
       }

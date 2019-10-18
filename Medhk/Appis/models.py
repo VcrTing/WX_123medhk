@@ -12,7 +12,7 @@ from django.contrib.auth.models import AbstractUser, User
 
 class Member(models.Model):
     # 微信用户
-    openid = models.CharField(max_length=120, null=True, blank=True, verbose_name="OpenId")
+    openid = models.CharField(max_length=120, null=True, blank=True, verbose_name="OpenId", unique=True)
     nickName = models.CharField(max_length=30, null=True, blank=True, verbose_name='微信昵称')
     country = models.CharField(max_length=30, null=True, blank=True, verbose_name='国家')
     province = models.CharField(max_length=30, null=True, blank=True, verbose_name='省份')
@@ -34,20 +34,27 @@ class Member(models.Model):
         else:
             return '-空白-'
 
+COMPLETE = (
+    (0, '失效'),
+    (1, '预约中'),
+    (2, '已完成')
+)
+
 class Order(models.Model):
     # 订单
     email = models.EmailField(verbose_name='邮箱', null=True)
     sex = models.CharField(max_length=6, choices=(('male', u'男'), ('female', u'女')), default='male', verbose_name='性别')
-    name = models.CharField(max_length=60, verbose_name='姓名', null=True)
+    name = models.CharField(max_length=60, verbose_name='预约人', null=True)
     phone = models.CharField(max_length=30, verbose_name='电话', null=True)
     contry = models.CharField(max_length=240, verbose_name='国籍', null=True)
     birth = models.CharField(max_length=60, verbose_name='出生日期', null=True)
+    reserve_date = models.CharField(max_length=60, verbose_name='预约日期', null=True)
     reserve_time = models.CharField(max_length=60, verbose_name='预约时间', null=True)
     mark = models.CharField(max_length=240, verbose_name='症状', null=True)
-    is_complete = models.SmallIntegerField(default=1, verbose_name='预约状态', null=True)
+    is_complete = models.SmallIntegerField(choices=COMPLETE, default=1, verbose_name='预约状态', null=True)
 
-    member = models.ForeignKey(Member, on_delete=models.CASCADE, null=True, blank=True, verbose_name='用户')
-    add_time = models.DateTimeField(default=timezone.now, verbose_name='创建时间')
+    member = models.ForeignKey(Member, on_delete=models.CASCADE, null=True, blank=True, verbose_name='所属微信用户')
+    add_time = models.DateTimeField(default=timezone.now, verbose_name='添加时间')
     status = models.BooleanField(default=True, verbose_name='数据状态')
 
     class Meta:

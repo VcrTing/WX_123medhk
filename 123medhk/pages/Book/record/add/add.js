@@ -15,7 +15,6 @@ Page({
     phone: '',
     birth: '1999-1-1',
     reserve_date: '',
-
     reserve_time: '',
     start_time: '6:00',
     end_time: '23:00'
@@ -41,9 +40,75 @@ Page({
     })
   },
   onShow: function () {
-    
+    const is_login = app.globalData.memberId
+    if (!is_login) {
+      app.toast('未授权，预约表单需授权后才可提交！！！', 'none')
+    }
   },
   //表单
+  submit: function () {
+    const is_name = this._valide_name(this)
+    const is_phone = this._valide_phone(this)
+    const is_login = app.globalData.memberId
+    if (!is_login) {
+      app.toast('未授权，请在首页进行授权，成功后再次提交表单！！！', 'none')
+      return
+    }
+    if (is_name != true) {
+      app.toast(is_name, 'none')
+      return
+    }
+    if (is_phone != true) {
+      this._msg(is_phone)
+      return
+    }
+    this._submit()
+  },
+  _submit: function () {
+    const self = this
+    const memberId = app.globalData.memberId
+    const data = {
+      'name': this.data.name,
+      'sex': this.data.sex,
+      'birth': this.data.birth,
+      'phone': this.data.phone,
+      'reserve_date': this.data.reserve_date,
+      'reserve_time': this.data.reserve_time,
+      'member': memberId
+    }
+    wx.request({
+      url: app.globalData.api.ORDER.MAIN,
+      method: 'POST',
+      data: JSON.stringify(data),
+      success: (res) => {
+        const navUrl = '/pages/Book/record/add_success/add_success?reserve_time=' + this.data.reserve_time + '&name=' + this.data.name + '&reserve_date=' + this.data.reserve_date
+        wx.redirectTo({
+          url: navUrl
+        })
+      },
+      fail: (err) => {
+        app.toast('請檢查網絡連接!!!', 'loading')
+        // self._submit_nowifi(data)
+      }
+    })
+  },
+  _submit_nowifi: function (data) {
+    data['status'] = true
+    data['is_complete'] = 1
+    data['id'] = app.now('', 'date') + '' + Math.random() * 100
+    let record = app.read('record')
+    try {
+      record.unshift(data)
+    } catch (e) {
+      record = []
+      record.push(data)
+    }
+    app.save('record', record)
+    const navUrl = '/pages/Book/record/add_success/add_success?reserve_time=' + this.data.reserve_time + '&name=' + this.data.name + '&reserve_date=' + this.data.reserve_date
+    wx.redirectTo({
+      url: navUrl
+    })
+  },
   formName: function (e) {
     this.setData({
       name: e.detail.value
@@ -88,64 +153,6 @@ Page({
     })
     */
     app.toast(is_msg, 'none')
-  },
-  submit: function () {
-    const is_name = this._valide_name(this)
-    const is_phone = this._valide_phone(this)
-    if (is_name != true) {
-      app.toast(is_name, 'none')
-      return
-    }
-    if (is_phone != true) {
-      this._msg(is_phone)
-      return
-    }
-    this._submit()
-  },
-  _submit: function () {
-    const self = this
-    const data = {
-      'name': this.data.name,
-      'sex': this.data.sex,
-      'birth': this.data.birth,
-      'phone': this.data.phone,
-      'reserve_date': this.data.reserve_date,
-      'reserve_time': this.data.reserve_time,
-      'member': app.globalData.memberId
-    }
-    console.log('data:', data)
-    wx.request({
-      url: app.globalData.api.ORDER.MAIN,
-      method: 'POST',
-      data: JSON.stringify(data),
-      success: (res) => {
-        const navUrl = '/pages/Book/record/add_success/add_success?reserve_time=' + this.data.reserve_time + '&name=' + this.data.name + '&reserve_date=' + this.data.reserve_date
-        wx.redirectTo({
-          url: navUrl
-        })
-      },
-      fail: (err) => {
-        /* app.toast('請檢查網絡連接!!!', 'loading') */
-        self._submit_nowifi(data)
-      }
-    })
-  },
-  _submit_nowifi: function (data) {
-    data['status'] = true
-    data['is_complete'] = 1
-    data['id'] = app.now('', 'date') + '' + Math.random() * 100
-    let record = app.read('record')
-    try {
-      record.unshift(data)
-    } catch (e) {
-      record = []
-      record.push(data)
-    }
-    app.save('record', record)
-    const navUrl = '/pages/Book/record/add_success/add_success?reserve_time=' + this.data.reserve_time + '&name=' + this.data.name + '&reserve_date=' + this.data.reserve_date
-    wx.redirectTo({
-      url: navUrl
-    })
   },
   _valide_name(self) {
     const name = self.data.name

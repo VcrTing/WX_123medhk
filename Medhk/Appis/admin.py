@@ -19,12 +19,12 @@ class MemberAdmin(admin.ModelAdmin):
     avatar.allow_tags = True
     avatar.short_description = '微信头像'
 
-    list_display = ['nickName', 'country', 'province', 'city', 'gender', 'language', 'add_time', 'status']
+    list_display = ['nickName', 'country', 'avatar', 'province', 'city', 'gender', 'language', 'add_time', 'status']
     exclude = ['avatarUrl', ]
     fieldsets = (
         ("信息", {
             "fields": (
-                'nickName', 'gender'
+                'avatar', 'nickName', 'gender'
             )
         }),
         ("地址", {
@@ -49,16 +49,31 @@ class MemberAdmin(admin.ModelAdmin):
 
 @admin.register(models.Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['email', 'sex', 'name', 'contry', 'birth', 'reserve_time', 'member', 'is_complete', 'add_time', 'status']
+    def color_complete(self, obj):
+        if obj.is_complete == 1:
+            the_name = '预约中'
+            color = 'orange'
+        elif obj.is_complete == 2:
+            the_name = '已完成'
+            color = 'green'
+        else:
+            the_name = '失效'
+            color = 'red'
+        return mark_safe(
+            '<span style="color: %s;">%s</span>' % (color, the_name)
+        )
+    color_complete.short_description = '订单状态'
+
+    list_display = ['name', 'phone', 'sex', 'birth', 'reserve_date', 'reserve_time', 'member', 'color_complete', 'add_time', 'status']
     fieldsets = (
         ("资料", {
             "fields": (
-                'name', 'sex', 'contry', 'birth', 'phone', 'email'
+                'name', 'sex', 'birth', 'phone'
             )
         }),
         ("信息", {
             "fields": (
-                'reserve_time', 'mark', 'is_complete'
+                'reserve_date', 'reserve_time', 'is_complete'
             )
         }),
         ("其他", {
@@ -67,7 +82,7 @@ class OrderAdmin(admin.ModelAdmin):
             )
         })
     )
-
+    readonly_fields = ['name', 'sex', 'birth', 'phone', 'member', 'add_time', 'reserve_date', 'reserve_time']
     search_fields = ['name', 'email', 'contry']
     list_filter = ['sex', 'status']
     date_hierarchy = 'add_time'
@@ -94,6 +109,7 @@ class DoneAdmin(admin.ModelAdmin):
     date_hierarchy = 'add_time'
     empty_value_display = ADMIN_CONF['empty_value_display']
 
+"""
 @admin.register(models.Activity)
 class ActivityAdmin(admin.ModelAdmin):
     list_display = ['title', 'content', 'overdue_time', 'add_time', 'status']
@@ -114,3 +130,4 @@ class ActivityAdmin(admin.ModelAdmin):
     list_filter = ['status', ]
     date_hierarchy = 'add_time'
     empty_value_display = ADMIN_CONF['empty_value_display']
+"""

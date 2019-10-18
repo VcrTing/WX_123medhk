@@ -1,5 +1,20 @@
 <!--index.wxml-->
 <view class="container">
+  <!-- 授权弹框 -->
+  <view class="modal t-center"  animation="{{ fade }}" wx:if="{{ show_modal }}">
+    <view class="row modal-body" animation="{{ slide }}">
+      <view class="row-inner t-dark">
+        <text class="h4">请求授权</text>
+        <view class="mt-main">
+          该站点的一些服务需授权才可使用!!!
+        </view>
+      </view>
+    </view>
+    <button class="btn btn-main-full" wx:if="{{ canIUse }}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" animation="{{ slide }}">
+      授权登录
+    </button>
+  </view>
+  <!-- END弹框 -->
   <view class="row">
     <view class="row-inner">
       <view class="w-half">
@@ -7,44 +22,153 @@
       </view>
     </view>
   </view>
+  <swiper class='swiper-index' indicator-dots='true' autoplay='true' interval='3000' duration='1000' circular='true'>
+    <block wx:for="{{ swiperUrl }}" wx:for-index="index" wx:key="index">
+      <swiper-item>
+        <image src='{{ item.url }}' class='swiper-image' mode='aspectFill'></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="row t-center">
+    <view class="empty-120"></view>
+    <view class="row-inner">
+      <view class="header-line b-main"></view>
+      <view class="header-main t-dark t-bold mt-main">
+        主要服务
+      </view>
+    </view>
+    <view class="empty-60"></view>
+  </view>
   <view class="row t-center">
     <view class="row-inner">
-      <view class="header-line b-main mt-main"></view>
+      <view class="card br-gold br-main-hr">
+        <view class="card-img">
+          <image mode="widthFix" class="br-gold br-main-hr" src="https://tech.up5d.com/wp-content/uploads/PROCEDURES-13.jpg"></image>
+        </view>
+        <view class="card-title h4 mt-main">
+          家庭医生
+        </view>
+        <view class="card-content mt-main">
+          家庭医生是个人和家庭在持续的医护过程中首个接触点，除了治疗疾病，还会教导病人如何保持身体健康。家庭医生知悉病人的生活习惯，全面照顾病人的生理、心理及社交。
+        </view>
+      </view> 
+      <view class="card br-gold br-main-hr">
+        <view class="card-img">
+          <image mode="widthFix" class="br-gold br-main-hr" src="https://tech.up5d.com/wp-content/uploads/PROCEDURES-2.jpg"></image>
+        </view>
+        <view class="card-title h4 mt-main">
+          医学美容
+        </view>
+        <view class="card-content mt-main">
+          医学美容有助改善外表，提升自信。以顶尖崭新医美科技及有效护理，改善及预防各种肌肤问题，将客人的肌肤提升至最佳健康状态。
+        </view>
+      </view> 
+      <view class="card br-gold br-main-hr">
+        <view class="card-img">
+          <image mode="widthFix" class="br-gold br-main-hr" src="https://tech.up5d.com/wp-content/uploads/PROCEDURES-3.jpg"></image>
+        </view>
+        <view class="card-title h4 mt-main">
+          健康检查组合
+        </view>
+        <view class="card-content mt-main">
+          定期进行身体健康检查，是预防性的保健措施，让你可以了解自己的身体状况，以保障健康。提供多款身体检查计划，内容全面、详尽，由西医会面解释报告。
+        </view>
+      </view> 
+      <view class="card br-gold br-main-hr">
+        <view class="card-img">
+          <image mode="widthFix" class="br-gold br-main-hr" src="https://tech.up5d.com/wp-content/uploads/PROCEDURES-14.jpg"></image>
+        </view>
+        <view class="card-title h4 mt-main">
+          疫苗接种
+        </view>
+        <view class="card-content mt-main">
+          接种疫苗应由初生婴儿开始，并在适当时间接种某些疫苗的加强剂，以维持免疫力。假如大部分人都接种疫苗，个人和群体所产生的免疫力可减少传染病在社区蔓延的机会、保障市民的生命和促进社区健康。
+        </view>
+      </view> 
+    </view>
+  </view>
+  <view class="row t-center">
+    <view class="empty-120"></view>
+    <view class="row-inner">
+      <view class="header-line b-main"></view>
       <view class="header-main t-dark t-bold mt-main">
         联络我们
       </view>
     </view>
+    <view class="empty-90"></view>
   </view>
-  <view class="row t-center mt-main">
+  <view class="row t-center">
     <view class="row-inner">
-      <view class="empty-60"></view>
+      <view class="h4 t-dark">
+        123 医务中心
+      </view>
+      <view class="empty-30"></view>
       <view class="t-dark t-bold">
-        荃灣圓墩圍65號安豐大廈地舖
+        荃湾圆墩围65号安丰大厦地舖
       </view>
       <view class="line-dased br-gold mt-main"></view>
       <view class="t-gold mt-main">
         37020123 / 55448155
       </view>
     </view>
+    <view class="empty-90"></view>
   </view>
-  <view class="row t-center mt-main bg-image-y">
-    <view class="row-inner">
-      <view>
+  <view class="row pos-relative">
+    <view class="row t-center bg-image-y bri-dark pos-absolute">
+      <view class="row-inner vis-hidden">
         <view class="empty-90"></view>
-        <view class="h4">應診時間</view>
-        <view class="empty-30"></view>
-        <view class="mt-main">星期一至五</view>
-        <view class="mt-main">上午9:00 – 下午1:00</view>
-        <view class="">下午3:00 – 下午8:00</view>
-        <view class="mt-main">星期六</view>
-        <view class="mt-main">上午9:00 – 下午1:00</view>
-        <view class="">下午3:00 – 下午7:00</view>
-        <view class="mt-main">星期日及公眾期假</view>
-        <view class="mt-main">上午9:00 – 下午1:00</view>
+          <view class="medic-time-title clearfix">
+            <view class="the-line f-l"></view>
+            <view class="the-text f-l h4">预约时间</view>
+            <view class="the-line f-l"></view>
+          </view>
+          <view class="medic-time-content">
+            <view class="empty-30"></view>
+            <view class="empty-30"></view>
+            <view class="mt-main">星期一至五</view>
+            <view class="mt-main">上午9:00 – 下午1:00</view>
+            <view class="">下午3:00 – 下午8:00</view>
+            <view class="mt-main">星期六</view>
+            <view class="mt-main">上午9:00 – 下午1:00</view>
+            <view class="">下午3:00 – 下午7:00</view>
+            <view class="mt-main">星期日及公众期假</view>
+            <view class="mt-main">上午9:00 – 下午1:00</view>
+            <view class="empty-90"></view>
+          </view>
+        </view>
         <view class="empty-90"></view>
-      </view>
+        <view class="btn btn-main-full btn-w-mid">
+          马上预约
+        </view>
+      <view class="empty-90"></view>
+    </view>
+    <view class="row t-center t-white pos-absolute">
+      <view class="row-inner">
+        <view class="empty-90"></view>
+          <view class="medic-time-title clearfix">
+            <view class="the-line f-l"></view>
+            <view class="the-text f-l h4">预约时间</view>
+            <view class="the-line f-l"></view>
+          </view>
+          <view class="medic-time-content">
+            <view class="empty-30"></view>
+            <view class="empty-30"></view>
+            <view class="mt-main">星期一至五</view>
+            <view class="mt-main">上午9:00 – 下午1:00</view>
+            <view class="">下午3:00 – 下午8:00</view>
+            <view class="mt-main">星期六</view>
+            <view class="mt-main">上午9:00 – 下午1:00</view>
+            <view class="">下午3:00 – 下午7:00</view>
+            <view class="mt-main">星期日及公众期假</view>
+            <view class="mt-main">上午9:00 – 下午1:00</view>
+            <view class="empty-90"></view>
+          </view>
+        </view>
+        <view class="empty-90"></view>
+        <view class="btn btn-main-full btn-w-mid" bindtap="goRecord">
+          马上预约
+        </view>
+      <view class="empty-90"></view>
     </view>
   </view>
-  <view class="empty-90"></view>
-  <view class="empty-60"></view>
 </view>

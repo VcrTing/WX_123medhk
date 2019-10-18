@@ -4,7 +4,7 @@
     <view class="row-inner clearfix">
       <view class="f-l w-half">
         <text class="header-main t-main t-bold">
-          預約詳情
+          预约详情
         </text>
       </view>
       <view class="f-l w-half"></view>
@@ -16,8 +16,8 @@
     <view class="empty-30 b-light"></view>
     <view class="row-inner d-dark">
       <view class="empty-120"></view>
-      <view class="d-block"><view class="t-grey d-inline">預約時間:</view> {{ record.reserve_time }}</view>
-      <view class="d-block"><view class="t-grey d-inline">預約狀態:</view>
+      <view class="d-block"><view class="t-grey d-inline">预约时间:</view> {{ record.reserve_date }} {{ record.reserve_time }}</view>
+      <view class="d-block"><view class="t-grey d-inline">预约状态:</view>
         <view class="d-inline t-green" wx:if="{{ record.is_complete == 2 }}">
           已完成
         </view> 
@@ -31,12 +31,12 @@
   <view class="row t-dark">
     <view class="row-inner">
       <text class="t-main h4">
-        資料
+        资料
       </text>
       <view class="hr"></view>
       <view class="empty-20"></view>
       <text class="d-block"><text class="t-grey">姓名:</text> {{ record.name }}</text>
-      <text class="d-block"><text class="t-grey">電話:</text> {{ record.phone }}</text>
+      <text class="d-block"><text class="t-grey">电话:</text> {{ record.phone }}</text>
       <text class="d-block"><text class="t-grey">生日:</text> {{ record.birth }}</text>
       <text class="t-red f-r" bindtap="trash">删除预约</text>
     </view>

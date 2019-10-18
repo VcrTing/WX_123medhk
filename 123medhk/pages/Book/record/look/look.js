@@ -38,8 +38,8 @@ Page({
               }, 2000)
             },
             fail: (err) => {
-              /* app.toast('網絡錯誤！刪除失敗！！！', 'none') */
-              self._trash_nowifi()
+              app.toast('網絡錯誤！刪除失敗！！！', 'none')
+              // self._trash_nowifi()
             }
           })
         }

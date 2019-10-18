@@ -25,7 +25,7 @@ SECRET_KEY = 'fk7_tqlxx@5pc!qh5i^93#zsa8pamxod#u6x46nzr0aza9q(&z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -119,9 +119,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'Zh-Hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -152,9 +152,9 @@ REST_FRAMEWORK = {
 
 # Admin
 ADMIN_CONF = {
-    'admin_title': '微信小程序后台',
-    'admin_header': '微信小程序后台',
-    'empty_value_display': '_Unknow_'
+    'admin_title': '123医务中心',
+    'admin_header': '123医务中心',
+    'empty_value_display': '暂无资料'
 }
 
 # Cors Header 跨域

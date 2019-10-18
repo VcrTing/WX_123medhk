@@ -29,21 +29,18 @@ class MemberViewSet(viewsets.ModelViewSet):
         appid = data['appid']
         secret = data['secret']
         user_info = data['userInfo']
-        print('app = ', appid, secret)
         res = {
             'openid': 'xxx',
         }
         data = user_info
-        """
+        
         url = 'https://api.weixin.qq.com/sns/jscode2session?appid='+ appid +'&secret='+ secret +'&js_code='+ code +'&grant_type=authorization_code'
-        res = requests.get(url).text()
-        openid = res.openid
-        """
-        openid = 'yyyyyyy'
+        req = requests.post(url, data = {})
+        openid = eval(req.text)['openid']
+        
         member = models.Member.objects.filter(openid = openid)
         if len(member):
             member = model_to_dict(member[0])
-            print('member =', member)
         try:
             data['openid'] = openid
             member, is_new = models.Member.objects.get_or_create(**data)
@@ -54,6 +51,7 @@ class MemberViewSet(viewsets.ModelViewSet):
         res['openid'] = openid
         res['id'] = member.id
         return Response(res)
+        
     """
     @list_route (methods = ['post'])
     def login (self, request):
